@@ -58,13 +58,13 @@ def process_line(line, starting_position)
 end
 
 #Small test
-first_digit = process_line("ULL", STARTING_POSITION)
-second_digit = process_line("RRDDD", first_digit)
-third_digit = process_line("LURDL", second_digit)
-fourth_digit = process_line("UUUUD", third_digit)
+# first_digit = process_line("ULL", STARTING_POSITION)
+# second_digit = process_line("RRDDD", first_digit)
+# third_digit = process_line("LURDL", second_digit)
+# fourth_digit = process_line("UUUUD", third_digit)
 
-#File.open("bathroom_code.txt").each do |line|
-#  line = line.strip
-#  digit_position = STARTING_POSITION
-#  digit_position = process_line(line, digit_position)
-#end
+File.open("bathroom_code.txt").each do |line|
+  line = line.strip
+  digit_position = STARTING_POSITION
+  digit_position = process_line(line, digit_position)
+end
