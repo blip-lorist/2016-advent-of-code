@@ -1,15 +1,15 @@
-def real_room?(encrypted_name)
+def real_room_sector_id(encrypted_name)
   letter_counter = Hash.new(0)
 
   given_checksum = encrypted_name.slice!(/\[.*?\]/)
-  sector_id = encrypted_name.slice!(-3..-1)
+  sector_id = encrypted_name.slice!(-3..-1).to_i
   
   letters = encrypted_name.gsub("-","").split("")
   letters.each do |letter|
     letter_counter[letter] += 1
   end
   
-  sorted_letters = letter_counter.sort_by { |key, value| -value } # descending order
+  sorted_letters = letter_counter.sort_by { |key, value| [-value, key] } # descending order
 
   accurate_checksum = "["
   sorted_letters[0..4].each do |pair|
@@ -20,8 +20,8 @@ def real_room?(encrypted_name)
   accurate_checksum += "]"
 
   if accurate_checksum == given_checksum
-    return true
+    return sector_id 
   else
-    return false
+    return nil 
   end
 end
