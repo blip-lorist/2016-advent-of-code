@@ -18,8 +18,33 @@ def read_lines
       counter += 1
     end
   end
-  puts counter
+  return counter
 end
 
-read_lines
+def read_columns
+  # memory suck edition
+  col_1 = []
+  col_2 = []
+  col_3 = []
+  File.open("./graphic_design_triangles.txt").each do |line|
+    sides = line.split(" ")
+    sides = sides.map(&:to_i)
+    col_1 << sides[0]
+    col_2 << sides[1]
+    col_3 << sides[2]
+  end
+  
+  counter = 0
+  [col_1, col_2, col_3].each do |column|
+    column.each_slice(3) do |x, y, z|
+      if possible_triangle?([x, y, z])
+        counter += 1
+      end
+    end
+  end
+  return counter
+end
+
+puts "First answer: #{read_lines}"
+puts "Second answer: #{read_columns}"
 
