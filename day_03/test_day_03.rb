@@ -6,5 +6,10 @@ describe "determines if a triangle is possible" do
     decision = possible_triangle?([5, 10, 25])
     assert_equal(decision, false)
   end
+
+  it "returns true when triangle is possible" do
+    decision = possible_triangle?([5, 10, 7])
+    assert_equal(decision, true)
+  end
 end
 
