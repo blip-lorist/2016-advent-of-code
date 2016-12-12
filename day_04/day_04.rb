@@ -21,7 +21,19 @@ def real_room_sector_id(encrypted_name)
 
   if accurate_checksum == given_checksum
     return sector_id 
-  else
-    return nil 
+  else 
+    return 0
   end
 end
+
+def add_sector_ids
+  sum = 0
+  File.open("encrypted_names.txt").each do |line|
+    sum += real_room_sector_id(line)
+  end
+
+  return sum
+end
+
+puts add_sector_ids
+
