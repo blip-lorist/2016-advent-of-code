@@ -2,7 +2,9 @@ def real_room_sector_id(encrypted_name)
   letter_counter = Hash.new(0)
 
   given_checksum = encrypted_name.slice!(/\[.*?\]/)
-  sector_id = encrypted_name.slice!(-3..-1).to_i
+  sector_id_index = encrypted_name.rindex("-") + 1
+
+  sector_id = encrypted_name.slice!(sector_id_index..-1).to_i
   
   letters = encrypted_name.gsub("-","").split("")
   letters.each do |letter|
