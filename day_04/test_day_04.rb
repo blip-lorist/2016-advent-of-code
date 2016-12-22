@@ -29,3 +29,36 @@ describe "identifies a real room" do
 
 end
 
+describe "rotates characters" do 
+  it "returns e when rotating z by 343" do
+    original_character = "a"
+    rotated_character= rotate(original_character, 2)
+    assert_equal(rotated_character, "c")
+  end
+
+  it "returns v when rotating q 343 times" do 
+    original_character = "q"
+    rotated_character= rotate(original_character, 343)
+    assert_equal(rotated_character, "v")
+  end
+  
+  it "returns V when rotating Q 343 times" do 
+    original_character = "Q"
+    rotated_character= rotate(original_character, 343)
+    assert_equal(rotated_character, "V")
+  end
+
+  it "returns - when rotating - by 2" do
+    original_character = "-"
+    rotated_character= rotate(original_character, 2)
+    assert_equal(rotated_character, "-")
+  end
+
+  it "returns 'very encrypted name'  when rotating 'qzmt-zixmtkozy-ivhz' by 343" do
+    original_characters = "qzmt-zixmtkozy-ivhz"
+    rotated_characters = rotate(original_characters, 343)
+    assert_equal(rotated_characters, "very encrypted name")
+  end
+
+
+end
