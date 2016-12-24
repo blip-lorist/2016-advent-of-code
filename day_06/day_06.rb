@@ -19,7 +19,7 @@ def get_common_characters(file)
     characters.each do |character| 
       frequency[character] += 1
     end
-    puts frequency.key(frequency.values.max)
+    puts frequency.key(frequency.values.min)
   end
 end
 
