@@ -16,6 +16,21 @@ describe "has_abba?" do
   end
 end
 
+describe "return possible babs" do
+  it "returns true if ip supports ssl" do 
+    assert_equal(["bab"],get_possible_babs("aba[bab]xyz"))
+    assert_equal(["bab","fof"],get_possible_babs("aba[bab]xyz[fof]eie"))
+  end
+end
+
+describe "supports_ssl?" do
+  it "returns true if ip supports ssl" do 
+    assert(supports_ssl?("aba[bab]xyz"))
+    assert(supports_ssl?("aaa[kek]eke"))
+    assert(supports_ssl?("zazbz[bzb]cdb"))
+  end
+end
+
 describe "abba_in_brackets?" do 
   it "returns true if abba is in brackets" do 
     input = "abcd[bddb]xyyx" 

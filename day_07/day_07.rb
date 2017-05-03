@@ -77,5 +77,41 @@ def process_input
   puts counter
 end
 
-process_input
+def supports_ssl?(ip_address)
+  maybe_babs = get_possible_babs(ip_address)
+  character_chunks = []
+  leading_characters = ip_address.split("[").first
+  trailing_characters = ip_address.split("]").last
+  character_chunks << leading_characters 
+  character_chunks << trailing_characters
+
+  ip_address.scan(/\](.*?)\[/) { 
+      in_between_match = $1
+      character_chunks << in_between_match 
+  }
+
+  character_chunks.each do |chunk|
+    maybe_babs.each do |maybe_bab|
+      aba = maybe_bab[1] + maybe_bab[0] + maybe_bab[1]
+      if chunk.include?(aba)
+        return true
+      end
+    end
+  end
+
+  return false
+end
+
+def get_possible_babs(ip_address)
+  match = ""
+  possible_babs = []
+  ip_address.scan(/\[(.*?)\]/) {
+    match = $1
+    if match.length == 3
+      possible_babs << match
+    end
+  }
+  return possible_babs
+end
+#process_input
 
