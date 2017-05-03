@@ -25,14 +25,9 @@ def has_abba?(string)
 end
 
 def abba_in_brackets?(string)
-  match = ""
-  matches = []
-  string.scan(/\[(.*?)\]/) {
-    match = $1
-    matches << match
-  }
-  matches.each do |content|
-    return true if has_abba?(content)
+  bracket_text = get_bracket_text(string)
+  bracket_text.each do |text|
+    return true if has_abba?(text)
   end
 
   return false
@@ -67,14 +62,20 @@ def supports_tls?(string)
 end
 
 def process_input
-  counter = 0
+  tls_counter = 0
+  ssl_counter = 0
   File.open('./input').each do |line|
     if supports_tls?(line)
-      counter += 1
+      tls_counter += 1
+    end
+
+    if supports_ssl?(line)
+      ssl_counter += 1
     end
   end
 
-  puts counter
+  puts "TLS: #{tls_counter}"
+  puts "SSL: #{ssl_counter}"
 end
 
 def supports_ssl?(ip_address)
@@ -102,16 +103,29 @@ def supports_ssl?(ip_address)
   return false
 end
 
-def get_possible_babs(ip_address)
+def get_bracket_text(ip_address)
   match = ""
-  possible_babs = []
+  matches = []
   ip_address.scan(/\[(.*?)\]/) {
     match = $1
-    if match.length == 3
-      possible_babs << match
-    end
+    matches << match
   }
-  return possible_babs
+  return matches 
 end
-#process_input
+
+def get_possible_babs(ip_address)
+  possible_babs = []
+  bracket_chunks = get_bracket_text(ip_address)
+  bracket_chunks.each do |chunk|
+    chunk_array = chunk.split("")    
+    chunk_array.each_with_index do |letter, i|
+      if letter == chunk_array[i+2]
+        possible_bab = chunk_array[i..i+2].join
+        possible_babs << possible_bab
+      end
+    end
+  end
+  possible_babs
+end
+process_input
 

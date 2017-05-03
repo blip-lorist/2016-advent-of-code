@@ -18,8 +18,8 @@ end
 
 describe "return possible babs" do
   it "returns true if ip supports ssl" do 
-    assert_equal(["bab"],get_possible_babs("aba[bab]xyz"))
-    assert_equal(["bab","fof"],get_possible_babs("aba[bab]xyz[fof]eie"))
+#    assert_equal(["bab"],get_possible_babs("aba[bab]xyz"))
+#    assert_equal(["bab","fof"],get_possible_babs("aba[bab]xyz[fof]eie"))
   end
 end
 
@@ -28,6 +28,10 @@ describe "supports_ssl?" do
     assert(supports_ssl?("aba[bab]xyz"))
     assert(supports_ssl?("aaa[kek]eke"))
     assert(supports_ssl?("zazbz[bzb]cdb"))
+  end
+
+  it "returns false if doesn't support ssl" do 
+    refute(supports_ssl?("xyx[xyx]xyx"))
   end
 end
 
